@@ -1,5 +1,6 @@
 package eu.telecomnancy.visualcards;
 
+import javafx.event.ActionEvent;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
@@ -11,6 +12,8 @@ public class DeckOfCards {
     private ArrayList<Card> deck;
     private Image backOfCardImage;
 
+    int topCard=0;
+
     //1. define the class
     //2. define the instance variables
     //3. create Constructor - this will define the object in the system
@@ -21,7 +24,7 @@ public class DeckOfCards {
     /**
      * This is a 1 argument constructor that passes in a collection
      * of Card objects
-     * @param deck
+     * @param deck le jeu de carte pour initialiser le jeu
      */
     public DeckOfCards(ArrayList<Card> deck) {
         this.deck = deck;
@@ -40,11 +43,12 @@ public class DeckOfCards {
 
         deck = new ArrayList<>();
 
-        for (String suit:suits)
-        {
-            for (String faceName:faceNames)
-                deck.add(new Card(faceName,suit));
+        for(CardColor color : CardColor.values()) {
+            for (CardValue value : CardValue.values()) {
+                deck.add(new Card(value,color));
+            }
         }
+
         backOfCardImage = new Image(getClass().getResource("images/black_joker.png").toString());
     }
 
@@ -69,10 +73,12 @@ public class DeckOfCards {
      */
     public Card dealTopCard()
     {
-        if (deck.size()>0)
-            return deck.remove(0);
-        else
-            return null;
+        Card result=deck.get(topCard);
+        topCard=topCard+1;
+        if (topCard>51) {
+            topCard=0;
+        }
+        return result;
     }
 
     /**

@@ -6,20 +6,21 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.visualcards.DeckViewController">
-   <VBox prefHeight="200.0">
+   <VBox prefHeight="200.0" prefWidth="600.0">
       <children>
-          <MenuBar fx:id="menuBar">
+          <MenuBar>
               <menus>
                   <Menu text="File">
                       <items>
-                          <MenuItem text="New" />
+                          <MenuItem  text="New" />
+                     <MenuItem mnemonicParsing="false" onAction="#refresh" text="Refresh" />
                           <SeparatorMenuItem />
                           <MenuItem text="Exit" />
                       </items>
                   </Menu>
                   <Menu text="CardDeck">
                       <items>
-                          <MenuItem text="Shuffle" />
+                          <MenuItem onAction="#shuffle" text="Shuffle" />
                           <MenuItem text="Sort" />
                       </items>
                   </Menu>
@@ -33,9 +34,9 @@
                   </Menu>
               </menus>
           </MenuBar>
-         <VBox prefHeight="200.0">
+         <VBox prefHeight="175.0" prefWidth="154.0">
             <children>
-               <HBox prefHeight="100.0">
+               <HBox prefHeight="223.0" prefWidth="600.0">
                   <children>
                         <ImageView fx:id="deckImageView" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="activeCardImageView" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
@@ -47,9 +48,9 @@
                   </children>
                </HBox>
          
-                        <GridPane fx:id="cardPane" prefHeight="315.0">
+                        <GridPane fx:id="cardPane" prefHeight="18.0" prefWidth="600.0">
 
-      </GridPane>
+                        </GridPane>
             </children>
          </VBox>
       </children>

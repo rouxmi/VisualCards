@@ -7,18 +7,19 @@ import java.util.List;
 
 public class Card implements Comparable<Card> {
     private String faceName, suit;
+    private CardColor color;
+    private CardValue value;
     private Image image;
 
-    public Card(String faceName, String suit) {
-        setFaceName(faceName);
-        setSuit(suit);
-        String fileName = faceName + "_of_"+suit+".png";
-
+    public Card(CardValue value, CardColor color) {
+        setValue(value);
+        setColor(color);
+        String fileName = getValidFaceNames().get(value.ordinal()) + "_of_"+getValidSuits().get(color.ordinal())+".png";
         image = new Image(getClass().getResource("images/"+fileName).toString());
     }
 
     public String getFaceName() {
-        return faceName;
+        return getValidFaceNames().get(getValue().ordinal());
     }
 
     /**
@@ -31,33 +32,6 @@ public class Card implements Comparable<Card> {
                             "queen","king","ace");
     }
 
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
-    }
-
-    /**
-     * This method will validate the argument and set the instance variable
-     * @param faceName 2,3,4,5,6,7,8,9,10,jack,queen,king
-     */
-    public void setFaceName(String faceName) {
-        List<String> validFaceNames = getValidFaceNames();
-        faceName = faceName.toLowerCase();
-
-        if (validFaceNames.contains(faceName))
-            this.faceName = faceName;
-        else
-            throw new IllegalArgumentException("Valid face names are: "+
-                            validFaceNames);
-    }
-
-    public String getSuit() {
-        return suit;
-    }
-
     /**
      * This method will return a list of valid suits
      * @return spades, hearts, clubs, diamonds
@@ -67,25 +41,48 @@ public class Card implements Comparable<Card> {
         return Arrays.asList("hearts","diamonds","spades","clubs");
     }
 
-    public void setSuit(String suit) {
-        List<String> validSuits = getValidSuits();
-        suit = suit.toLowerCase();
 
-        if (validSuits.contains(suit))
-            this.suit = suit;
-        else
-            throw new IllegalArgumentException("valid suits are: "+ validSuits);
+    public Image getImage() {
+        return image;
     }
 
-    public String toString()
-    {
-        return String.format("%s of %s", faceName, suit);
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    public String getSuit() {
+        return suit;
     }
 
     @Override
     public int compareTo(Card c) {
-        int compare=this.faceName.compareTo(c.getFaceName());
-        if (compare!=0) return compare;
-        return this.suit.compareTo(c.getSuit());
+        if (this.getValue().ordinal() < c.getValue().ordinal()) return -1;
+        if (this.getValue().ordinal() > c.getValue().ordinal()) return 1;
+        return this.getColor().compareTo(c.getColor());
+    }
+
+    @Override
+    public String toString() {
+        return "Card{" +
+                "color=" + getColor() +
+                ", value=" + getValue() +
+                '}';
+    }
+
+
+    public CardColor getColor() {
+        return color;
+    }
+
+    public void setColor(CardColor color) {
+        this.color = color;
+    }
+
+    public CardValue getValue() {
+        return value;
+    }
+
+    public void setValue(CardValue value) {
+        this.value = value;
     }
 }

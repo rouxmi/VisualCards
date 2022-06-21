@@ -3,6 +3,7 @@ package eu.telecomnancy.visualcards;
 import javafx.event.ActionEvent;
 import javafx.scene.image.Image;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,13 +15,6 @@ public class DeckOfCards {
 
     int topCard=0;
 
-    //1. define the class
-    //2. define the instance variables
-    //3. create Constructor - this will define the object in the system
-    //4. create get/set methods
-    //5. create any custom methods
-
-
     /**
      * This is a 1 argument constructor that passes in a collection
      * of Card objects
@@ -28,7 +22,11 @@ public class DeckOfCards {
      */
     public DeckOfCards(ArrayList<Card> deck) {
         this.deck = deck;
-        backOfCardImage = new Image(getClass().getResource("images/black_joker.png").toString());
+        URL imageFile=getClass().getResource("images/black_joker.png");
+        if (imageFile!=null) {
+            backOfCardImage = new Image(imageFile.toString());
+        }
+
     }
 
     /**
@@ -48,8 +46,10 @@ public class DeckOfCards {
                 deck.add(new Card(value,color));
             }
         }
-
-        backOfCardImage = new Image(getClass().getResource("images/black_joker.png").toString());
+        URL imageFile=getClass().getResource("images/black_joker.png");
+        if (imageFile!=null) {
+            backOfCardImage = new Image(imageFile.toString());
+        }
     }
 
     public ArrayList<Card> getDeck() {

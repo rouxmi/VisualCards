@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
@@ -62,11 +63,14 @@ public class DeckViewController implements Initializable {
             cardPane.setHgap(10);
             cardPane.gridLinesVisibleProperty().setValue(true);
             for (int j = 0; j < 13; j++) {
+                BorderPane cardborder = new BorderPane();
+                cardborder.setStyle("-fx-border-color: black");
                 ImageView cardj = new ImageView();
                 cardj.setFitHeight(120);
                 cardj.setFitWidth(70);
                 cardj.setImage(deck.getDeck().get(i * 13 + j).getImage());
-                cardPane.addColumn(j, cardj);
+                cardborder.setCenter(cardj);
+                cardPane.addColumn(j, cardborder);
             }
 
         }

@@ -89,14 +89,23 @@ public class DeckOfCards {
         Collections.shuffle(deck);
     }
 
+    /**
+     * This method will "sort" the deck
+     */
     public void sort() {
         Collections.sort(deck);
     }
 
+    /**
+     * This method will draw a card from the deck at a defined place (i)
+     */
     public Card drawACard(int i) {
         return deck.get(i);
     }
 
+    /**
+     * This method will draw a card from the deck at a random place
+     */
     public Card drawARandomCard() {
         var index=new Random().nextInt(52);
         return deck.get(index);

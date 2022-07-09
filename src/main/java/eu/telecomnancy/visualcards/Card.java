@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Card implements Comparable<Card> {
-    private String faceName, suit;
+    private String suit;
     private CardColor color;
     private CardValue value;
     private Image image;

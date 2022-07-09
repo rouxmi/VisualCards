@@ -1,12 +1,10 @@
 package eu.telecomnancy.visualcards;
 
-import javafx.event.ActionEvent;
 import javafx.scene.image.Image;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 
 public class DeckOfCards {
@@ -34,10 +32,6 @@ public class DeckOfCards {
      */
     public DeckOfCards()
     {
-        List<String> suits = Card.getValidSuits(); //this is calling a static method
-                                                    //so we do NOT need an instance of Card
-                                                    //to call it
-        List<String> faceNames = Card.getValidFaceNames();
 
         deck = new ArrayList<>();
 

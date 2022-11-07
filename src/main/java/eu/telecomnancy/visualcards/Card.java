@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 import java.util.Arrays;
 import java.util.List;
 
+// représente une carte à jouer. Elle a une couleur, une valeur. ELle a aussi une référence vers une représentation visuelle
 public class Card implements Comparable<Card> {
     private String suit;
     private CardColor color;

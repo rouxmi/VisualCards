@@ -1,7 +1,9 @@
 # Exercices
 
 Modifiez ce projet pour rendre sa conception plus conforme aux meilleures pratiques (et mettre en oeuvre quelques). 
-Il faut en particulier séparer modèle, vue et controle et un observeur
+
+* Il faut en particulier séparer modèle, vue et controle et ajouter un observeur
+
 
 
 ## Pattern Command
@@ -19,9 +21,12 @@ Utiliser le pattern Strategy pour proposer différentes méthodes de mélange de
 
 ## Méthode
 
-Vous forkerez le projet et à chaque séance de TP vous ferez au moins un commit et un push que vous commenterez pour indiquer ce que vous avez réalisé
+Vous clonerez le projet et à chaque séance de TP vous ferez au moins un commit et un push que vous commenterez pour indiquer ce que vous avez réalisé
 
-
+## Pour exécuter le programme
+* Clonez le projet
+* Chargez le projet dans votre IDE (de préférence IntelliJ)
+* Pour exécuter l'application faites mvn run en ligne de commande ou dans l'IDE
 
 
 

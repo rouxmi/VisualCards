@@ -25,7 +25,7 @@ tasks.withType(JavaCompile) {
 
 application {
     mainModule = 'eu.telecomnancy.visualcards'
-    mainClass = 'eu.telecomnancy.visualcards.HelloApplication'
+    mainClass = 'eu.telecomnancy.visualcards.Main'
 }
 
 javafx {

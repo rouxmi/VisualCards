@@ -1,13 +1,15 @@
 # Exercices
 
-Modifiez ce projet pour rendre sa conception plus conforme aux meilleures pratiques (et mettre en oeuvre quelques). 
+Modifiez ce projet pour rendre sa conception plus conforme aux meilleures pratiques (et mettre en oeuvre quelques unes). 
 
-* Il faut en particulier séparer modèle, vue et controle et ajouter un observeur
+* Il faut en particulier commencer par séparer modèle, vue et controle et ajouter un observeur. 
+* Il ne doit pas y avoir de références à des éléments de vue dans le modèle.
+* Il ne doit pas y avoir besoin du l'option refresh du menu quand on fait une action qui change l'état du paquet.
 
 
 
 ## Pattern Command
-Utilisez le pattern Command pour lier les menus et les outils aux actions qu'il est possible de le faire sur le jeu de carte
+Utilisez le pattern Command pour lier les menus et les outils aux actions qu'il est possible de le faire sur le jeu de carte.
 
 ## Pattern Factory
 On veut pouvoir choisir un type de jeu de carte ? Scopa, Tarot, Belote, 52 cartes ?
@@ -17,7 +19,12 @@ Utiliser le même support pour l'affichage et les différentes fonctions. Ce qui
 ont une couleur et une valeur. Mais ça peut changer en fonction du type de carte.
 
 ## Pattern Strategy
-Utiliser le pattern Strategy pour proposer différentes méthodes de mélange des cartes.
+Utiliser le pattern Strategy pour permettde de choisir entre différentes méthodes de mélange des cartes (autre que shuffle de Collection).
+[https://www.geeksforgeeks.org/shuffle-a-given-array-using-fisher-yates-shuffle-algorithm
+](https://www.geeksforgeeks.org/shuffle-a-given-array-using-fisher-yates-shuffle-algorithm/?ref=rp)
+[https://www.geeksforgeeks.org/shuffle-a-deck-of-cards-3/
+](https://www.geeksforgeeks.org/shuffle-a-deck-of-cards-3/)
+
 
 ## Méthode
 

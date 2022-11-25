@@ -1,5 +1,6 @@
 package eu.telecomnancy.visualcards;
 
+import javafx.event.ActionEvent;
 import javafx.scene.image.Image;
 
 import java.net.URL;
@@ -13,6 +14,10 @@ public class DeckOfCards {
     private Image backOfCardImage;
 
     int topCard=0;
+
+    public Card getTopCard() {
+        return this.deck.get(topCard);
+    }
 
     /**
      * This is a 1 argument constructor that passes in a collection

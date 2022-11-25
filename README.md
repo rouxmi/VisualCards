@@ -1,12 +1,24 @@
 # Exercices
 
+## Installation
+
+Ce projet est auto-suffisant dans le sans où il propose d'utiliser l'outil Gradle (https://gradle.org/) pour construire l'application fournie.
+Un simple `./gradlew run` dans un terminal devrait vous télécharger l'outil gradle, télécharger les dépendances nécessaires (JavaFX en autre), lancer la compilation et exécuter le programme. 
+
+Il se peut que vous rencontriez des problèmes. Voici quelques solutions :
+- il faut que le script `./gradlew` soit exécutable (un simple `chmod a+x ./gradlew` devrait faire l'affaire)
+- Gradle ne supportant pas encore Java 19, il faut utiliser une version 17 ou 18 du Java Development Kit (JDK) (utiliser la commande `java --version` ou un `./gradlew --version` pour vérifier votre version actuelle du JDK.)
+
+Cette configuration peut également être importer dans IntelliJ pour créer un projet fonctionnelle à partir de celle-ci. Pour cela, lors de la création de votre projet IntelliJ, il faut sélectionner le fichier `build.gradle` et non pas uniquement le répertoire du projet.
+
+
+## Préliminaires
+
 Modifiez ce projet pour rendre sa conception plus conforme aux meilleures pratiques (et mettre en oeuvre quelques unes). 
 
 * Il faut en particulier commencer par séparer modèle, vue et controle et ajouter un observeur. 
 * Il ne doit pas y avoir de références à des éléments de vue dans le modèle.
 * Il ne doit pas y avoir besoin du l'option refresh du menu quand on fait une action qui change l'état du paquet.
-
-
 
 ## Pattern Command
 Utilisez le pattern Command pour lier les menus et les outils aux actions qu'il est possible de le faire sur le jeu de carte.

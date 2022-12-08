@@ -14,8 +14,15 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("DeckView.fxml"));
-        Scene scene = new Scene(root);
+        
+        DeckOfCards deckOfCards = new DeckOfCards(); 
+        FXMLLoader loader = new FXMLLoader(); 
+        loader.setLocation(getClass().getResource("DeckView.fxml")); 
+        loader.setControllerFactory(iC -> new DeckViewController(deckOfCards)); 
+        Parent panneau = loader.load() ;
+    
+        /* Parent root = FXMLLoader.load(getClass().getResource("DeckView.fxml"));*/
+        Scene scene = new Scene(panneau);
 
         primaryStage.setTitle("Deck Of Cards");
         primaryStage.setScene(scene);

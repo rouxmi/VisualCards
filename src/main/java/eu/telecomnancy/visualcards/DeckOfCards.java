@@ -1,23 +1,15 @@
 package eu.telecomnancy.visualcards;
 
-import javafx.event.ActionEvent;
-import javafx.scene.image.Image;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
 // Représente une jeu de cartes. Une variable référence l'image représentant le dos d'une carte.
-public class DeckOfCards {
+public class DeckOfCards extends MyObservable {
     private ArrayList<Card> deck;
-    private Image backOfCardImage;
 
     int topCard=0;
-
-    public Card getTopCard() {
-        return this.deck.get(topCard);
-    }
 
     /**
      * This is a 1 argument constructor that passes in a collection
@@ -26,11 +18,7 @@ public class DeckOfCards {
      */
     public DeckOfCards(ArrayList<Card> deck) {
         this.deck = deck;
-        URL imageFile=getClass().getResource("images/black_joker.png");
-        if (imageFile!=null) {
-            backOfCardImage = new Image(imageFile.toString());
-        }
-
+        shuffle();
     }
 
     /**
@@ -46,10 +34,7 @@ public class DeckOfCards {
                 deck.add(new Card(value,color));
             }
         }
-        URL imageFile=getClass().getResource("images/black_joker.png");
-        if (imageFile!=null) {
-            backOfCardImage = new Image(imageFile.toString());
-        }
+        shuffle();
     }
 
     public ArrayList<Card> getDeck() {
@@ -58,15 +43,10 @@ public class DeckOfCards {
 
     public void setDeck(ArrayList<Card> deck) {
         this.deck = deck;
+        notifyObservers();
     }
 
-    public Image getBackOfCardImage() {
-        return backOfCardImage;
-    }
-
-    public void setBackOfCardImage(Image backOfCardImage) {
-        this.backOfCardImage = backOfCardImage;
-    }
+   
 
     /**
      * This method will "deal" the top card off the deck. At the end of the deck we start over at the beginning
@@ -78,6 +58,7 @@ public class DeckOfCards {
         if (topCard>51) {
             topCard=0;
         }
+        notifyObservers();
         return result;
     }
 
@@ -87,6 +68,7 @@ public class DeckOfCards {
     public void shuffle()
     {
         Collections.shuffle(deck);
+        notifyObservers();
     }
 
     /**
@@ -94,6 +76,7 @@ public class DeckOfCards {
      */
     public void sort() {
         Collections.sort(deck);
+        notifyObservers();
     }
 
     /**

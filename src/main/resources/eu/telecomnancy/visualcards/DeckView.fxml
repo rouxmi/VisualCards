@@ -11,13 +11,12 @@
         <MenuBar>
             <Menu text="File">
                 <MenuItem text="New"/>
-                <MenuItem mnemonicParsing="false" onAction="#refresh" text="Refresh"/>
                 <SeparatorMenuItem/>
                 <MenuItem text="Exit"/>
             </Menu>
             <Menu text="CardDeck">
                 <MenuItem onAction="#shuffle" text="Shuffle"/>
-                <MenuItem text="Sort"/>
+                <MenuItem onAction="#sort" text="Sort"/>
             </Menu>
             <Menu text="Draw">
                 <MenuItem text="Draw a Random Card"/>
@@ -30,7 +29,7 @@
             <Button mnemonicParsing="false" text="Draw a Card"/>
             <Button fx:id="nextCardButton" mnemonicParsing="false" onAction="#nextCardButtonPushed" text="Next Card"
                     textAlignment="CENTER"/>
-            <Button mnemonicParsing="false" text="Shuffle"/>
+            <Button mnemonicParsing="false" text="Shuffle" onAction="#shuffle"/>
         </ToolBar>
         <VBox prefHeight="175.0" prefWidth="154.0">
             <HBox alignment="TOP_CENTER" prefHeight="223.0" prefWidth="600.0">

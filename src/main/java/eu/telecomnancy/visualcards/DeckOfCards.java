@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-// Représente une jeu de cartes. Une variable référence l'image représentant le dos d'une carte.
+// Représente un jeu de cartes. Une variable référence l'image représentant le dos d'une carte.
 public class DeckOfCards extends MyObservable {
     private ArrayList<Card> deck;
 
@@ -62,6 +62,8 @@ public class DeckOfCards extends MyObservable {
         return result;
     }
 
+
+
     /**
      * This method will shuffle the deck of cards
      */
@@ -96,4 +98,11 @@ public class DeckOfCards extends MyObservable {
     }
 
 
+    public Card getTopCard() {
+        return deck.get(topCard);
+    }
+
+    public void newGame() {
+        notifyObservers();
+    }
 }

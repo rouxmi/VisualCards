@@ -10,26 +10,32 @@
     <VBox prefHeight="200.0" prefWidth="600.0">
         <MenuBar>
             <Menu text="File">
-                <MenuItem text="New"/>
+                <Menu text="New Game">
+                    <MenuItem text="Belote"/>
+                    <MenuItem text="Tarot"/>
+                    <MenuItem text="Scopa"/>
+                    <MenuItem text="52 Cartes"/>
+                </Menu>
                 <SeparatorMenuItem/>
-                <MenuItem text="Exit"/>
+                <MenuItem text="Exit" onAction="#Exit"/>
             </Menu>
             <Menu text="CardDeck">
                 <MenuItem onAction="#shuffle" text="Shuffle"/>
                 <MenuItem onAction="#sort" text="Sort"/>
             </Menu>
             <Menu text="Draw">
-                <MenuItem text="Draw a Random Card"/>
-                <MenuItem text="Draw next Card"/>
+                <MenuItem text="Draw a Random Card" onAction="#DrawARandomCard"/>
+                <MenuItem text="Draw next Card" onAction="#Nextcard"/>
                 <SeparatorMenuItem/>
-                <MenuItem text="About"/>
+                <MenuItem text="About" onAction="#About"/>
             </Menu>
         </MenuBar>
         <ToolBar prefHeight="40.0" prefWidth="200.0">
-            <Button mnemonicParsing="false" text="Draw a Card"/>
-            <Button fx:id="nextCardButton" mnemonicParsing="false" onAction="#nextCardButtonPushed" text="Next Card"
+            <Button mnemonicParsing="false" text="Draw a Card" onAction="#DrawCard"/>
+            <Button fx:id="nextCardButton" mnemonicParsing="false" onAction="#Nextcard" text="Next Card"
                     textAlignment="CENTER"/>
             <Button mnemonicParsing="false" text="Shuffle" onAction="#shuffle"/>
+            <Button mnemonicParsing="false" text="Undo Action" onAction="#Undo"/>
         </ToolBar>
         <VBox prefHeight="175.0" prefWidth="154.0">
             <HBox alignment="TOP_CENTER" prefHeight="223.0" prefWidth="600.0">

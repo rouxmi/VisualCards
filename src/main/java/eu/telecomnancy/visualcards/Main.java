@@ -27,5 +27,6 @@ public class Main extends Application {
         primaryStage.setTitle("Deck Of Cards");
         primaryStage.setScene(scene);
         primaryStage.show();
+
     }
 }

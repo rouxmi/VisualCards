@@ -6,4 +6,6 @@ module eu.telecomnancy.visualcards {
 
     opens eu.telecomnancy.visualcards to javafx.fxml;
     exports eu.telecomnancy.visualcards;
+    exports eu.telecomnancy.visualcards.Commands;
+    opens eu.telecomnancy.visualcards.Commands to javafx.fxml;
 }

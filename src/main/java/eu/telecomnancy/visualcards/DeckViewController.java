@@ -1,5 +1,6 @@
 package eu.telecomnancy.visualcards;
 
+import eu.telecomnancy.visualcards.Commands.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,6 +31,8 @@ public class DeckViewController implements MyObserver, Initializable {
     
     private Image backOfCardImage;
 
+    private CommandHistory history = new CommandHistory();
+
     /* Relie la classe DeckOfCards au controller*/
     public DeckViewController(DeckOfCards deck) {
         this.deck = deck ;
@@ -41,7 +44,7 @@ public class DeckViewController implements MyObserver, Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         /* deck = new DeckOfCards(); -> il faut initialiser DeckOfCards dans la class correspondant et relier la class au controlleur*/ 
-        URL imageFile=getClass().getResource("images/black_joker.png");
+        URL imageFile=getClass().getResource("images/back_of_card.jpg");
         if (imageFile!=null) {
             backOfCardImage = new Image(imageFile.toString());
         }
@@ -58,10 +61,10 @@ public class DeckViewController implements MyObserver, Initializable {
         this.backOfCardImage = backOfCardImage;
     }
 
-    @FXML
-    public void nextCardButtonPushed() {
-        activeCardImageView.setImage(deck.dealTopCard().getImage());
+    public void DrawCard(ActionEvent actionEvent) {
+        executeCommand(new DrawCardCommand(deck));
     }
+
 
     @FXML
     public void shuffle(ActionEvent event) {
@@ -70,7 +73,40 @@ public class DeckViewController implements MyObserver, Initializable {
 
     @FXML
     public void sort(ActionEvent event) {
-        deck.sort();
+        executeCommand(new SortCommand(deck));
+    }
+
+    public void Nextcard(ActionEvent actionEvent) {
+        executeCommand(new NextcardCommand(deck));
+    }
+
+    public void Exit(ActionEvent actionEvent) {
+        executeCommand(new ExitCommand());
+    }
+
+    public void New(ActionEvent actionEvent) {
+        executeCommand(new NewGameCommand());
+    }
+
+    public void Undo(ActionEvent actionEvent) {
+        if (!history.isEmpty()) {
+            history.pop().undo();
+        }
+    }
+
+    public void DrawARandomCard(ActionEvent actionEvent) {
+        executeCommand(new DrawARandomCardCommand(deck));
+    }
+
+
+    public void About(ActionEvent actionEvent) {
+        executeCommand(new AboutCommand());
+    }
+
+    private void executeCommand(Command command) {
+        if (command.execute()) {
+            history.push(command);
+        }
     }
 
 
@@ -78,6 +114,7 @@ public class DeckViewController implements MyObserver, Initializable {
     public void update() {
         deckImageView.setImage(getBackOfCardImage());
         cardPane.getChildren().clear();
+        activeCardImageView.setImage(deck.getTopCard().getImage());
         for (int i = 0; i < 4; i++) {
             cardPane.addRow(i);
             cardPane.setVgap(10);
@@ -96,5 +133,8 @@ public class DeckViewController implements MyObserver, Initializable {
 
         }
     }
+
+
+
 }
 

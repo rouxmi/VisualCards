@@ -1,4 +1,5 @@
-package eu.telecomnancy.visualcards;
+package eu.telecomnancy.visualcards.games;
+
 
 import javafx.scene.image.Image;
 
@@ -6,41 +7,23 @@ import java.util.Arrays;
 import java.util.List;
 
 // représente une carte à jouer. Elle a une couleur, une valeur. ELle a aussi une référence vers une représentation visuelle
-public class Card implements Comparable<Card> {
+public class Card implements CardInterface,Comparable<Card> {
     private String suit;
     private CardColor color;
     private CardValue value;
-    private Image image;
+    public Image image;
 
     public Card(CardValue value, CardColor color) {
         setValue(value);
         setColor(color);
-        String fileName = getValidFaceNames().get(value.ordinal()) + "_of_"+getValidSuits().get(color.ordinal())+".png";
-        image = new Image(getClass().getResource("images/"+fileName).toString());
     }
 
-    public String getFaceName() {
-        return getValidFaceNames().get(getValue().ordinal());
-    }
+
 
     /**
      * This method returns a list of face names that are valid for
      * Card objects
      */
-    public static List<String> getValidFaceNames()
-    {
-        return Arrays.asList("2","3","4","5","6","7","8","9","10","jack",
-                            "queen","king","ace");
-    }
-
-    /**
-     * This method will return a list of valid suits
-     * @return spades, hearts, clubs, diamonds
-     */
-    public static List<String> getValidSuits()
-    {
-        return Arrays.asList("hearts","diamonds","spades","clubs");
-    }
 
 
     public Image getImage() {

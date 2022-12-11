@@ -1,18 +1,17 @@
 package eu.telecomnancy.visualcards.Commands;
 
 import eu.telecomnancy.visualcards.games.DeckOfCards;
+import eu.telecomnancy.visualcards.games.Tarot.DeckOfCardsTarot;
 
-public class SortCommand extends Command {
+public class NewTarotGameCommand extends Command {
 
-    public SortCommand(DeckOfCards deck) {
+    public NewTarotGameCommand(DeckOfCards deck) {
         super(deck);
     }
 
     @Override
     public boolean execute() {
-        backup();
-        deck.sort();
-        deck.notifyObservers();
+        deck= new DeckOfCardsTarot();
         return true;
     }
 

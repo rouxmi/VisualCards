@@ -11,10 +11,9 @@
         <MenuBar>
             <Menu text="File">
                 <Menu text="New Game">
-                    <MenuItem text="Belote"/>
-                    <MenuItem text="Tarot"/>
-                    <MenuItem text="Scopa"/>
-                    <MenuItem text="52 Cartes"/>
+                    <MenuItem text="Belote" onAction="#NewBeloteGame"/>
+                    <MenuItem text="Tarot" onAction="#NewTarotGame"/>
+                    <MenuItem text="52 Cartes" onAction="#New52Game"/>
                 </Menu>
                 <SeparatorMenuItem/>
                 <MenuItem text="Exit" onAction="#Exit"/>

@@ -1,6 +1,6 @@
 package eu.telecomnancy.visualcards.Commands;
 
-import eu.telecomnancy.visualcards.DeckOfCards;
+import eu.telecomnancy.visualcards.games.DeckOfCards;
 
 public class ShuffleCommand extends Command {
 

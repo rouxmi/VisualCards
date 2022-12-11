@@ -1,8 +1,8 @@
 package eu.telecomnancy.visualcards.Commands;
 
 
-import eu.telecomnancy.visualcards.Card;
-import eu.telecomnancy.visualcards.DeckOfCards;
+import eu.telecomnancy.visualcards.games.Card;
+import eu.telecomnancy.visualcards.games.DeckOfCards;
 
 import java.util.ArrayList;
 

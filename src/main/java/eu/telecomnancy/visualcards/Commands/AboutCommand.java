@@ -1,11 +1,13 @@
 package eu.telecomnancy.visualcards.Commands;
 
+import eu.telecomnancy.visualcards.games.DeckOfCards;
+
 import java.io.IOException;
 
 public class AboutCommand extends Command {
 
-    public AboutCommand() {
-        super(null);
+    public AboutCommand(DeckOfCards deck) {
+        super(deck);
     }
 
     @Override

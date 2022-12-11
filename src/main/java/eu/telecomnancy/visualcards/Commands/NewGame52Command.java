@@ -1,19 +1,19 @@
 package eu.telecomnancy.visualcards.Commands;
 
+import eu.telecomnancy.visualcards.games.Cartes52.DeckOfCards52;
 import eu.telecomnancy.visualcards.games.DeckOfCards;
 
-public class SortCommand extends Command {
+public class NewGame52Command extends Command {
 
-    public SortCommand(DeckOfCards deck) {
+    public NewGame52Command(DeckOfCards deck) {
         super(deck);
     }
 
     @Override
     public boolean execute() {
-        backup();
-        deck.sort();
-        deck.notifyObservers();
+        deck= new DeckOfCards52();
         return true;
     }
 
 }
+

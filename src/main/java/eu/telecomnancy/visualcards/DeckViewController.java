@@ -1,6 +1,7 @@
 package eu.telecomnancy.visualcards;
 
 import eu.telecomnancy.visualcards.Commands.*;
+import eu.telecomnancy.visualcards.games.DeckOfCards;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,6 +14,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.scene.image.Image;
+
+import static java.lang.Math.round;
 
 public class DeckViewController implements MyObserver, Initializable {
 
@@ -27,7 +30,7 @@ public class DeckViewController implements MyObserver, Initializable {
     private GridPane cardPane;
 
     /* Initialisation de DeckOfCards */
-    private final DeckOfCards deck ; 
+    private DeckOfCards deck ;
     
     private Image backOfCardImage;
 
@@ -44,9 +47,9 @@ public class DeckViewController implements MyObserver, Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         /* deck = new DeckOfCards(); -> il faut initialiser DeckOfCards dans la class correspondant et relier la class au controlleur*/ 
-        URL imageFile=getClass().getResource("images/back_of_card.jpg");
+        URL imageFile=getClass().getResource("/eu/telecomnancy/visualcards/images/back_of_card.jpg");
         if (imageFile!=null) {
-            backOfCardImage = new Image(imageFile.toString());
+            setBackOfCardImage(new Image(imageFile.toString()));
         }
     
         update();
@@ -68,7 +71,7 @@ public class DeckViewController implements MyObserver, Initializable {
 
     @FXML
     public void shuffle(ActionEvent event) {
-        deck.shuffle();
+        executeCommand(new ShuffleCommand(deck));
     }
 
     @FXML
@@ -84,9 +87,6 @@ public class DeckViewController implements MyObserver, Initializable {
         executeCommand(new ExitCommand());
     }
 
-    public void New(ActionEvent actionEvent) {
-        executeCommand(new NewGameCommand());
-    }
 
     public void Undo(ActionEvent actionEvent) {
         if (!history.isEmpty()) {
@@ -100,13 +100,27 @@ public class DeckViewController implements MyObserver, Initializable {
 
 
     public void About(ActionEvent actionEvent) {
-        executeCommand(new AboutCommand());
+        executeCommand(new AboutCommand(deck));
+    }
+
+    public void NewBeloteGame(ActionEvent actionEvent) {
+        executeCommand(new NewBeloteGameCommand(deck));
+    }
+
+    public void NewTarotGame(ActionEvent actionEvent) {
+        executeCommand(new NewTarotGameCommand(deck));
+    }
+
+    public void New52Game(ActionEvent actionEvent) {
+        executeCommand(new NewGame52Command(deck));
     }
 
     private void executeCommand(Command command) {
         if (command.execute()) {
             history.push(command);
+            deck=command.deck;
         }
+        update();
     }
 
 
@@ -115,18 +129,27 @@ public class DeckViewController implements MyObserver, Initializable {
         deckImageView.setImage(getBackOfCardImage());
         cardPane.getChildren().clear();
         activeCardImageView.setImage(deck.getTopCard().getImage());
-        for (int i = 0; i < 4; i++) {
+        int rows= 4;
+        int cols= 13;
+        if (deck.getDeck().size() == 32) {
+            cols= 8;
+        }
+        if(deck.getDeck().size()==78){
+            rows= 6;
+            cols= 13;
+        }
+        for (int i = 0; i < rows; i++) {
             cardPane.addRow(i);
             cardPane.setVgap(10);
             cardPane.setHgap(10);
             cardPane.gridLinesVisibleProperty().setValue(true);
-            for (int j = 0; j < 13; j++) {
+            for (int j = 0; j < cols; j++) {
                 BorderPane cardborder = new BorderPane();
                 cardborder.setStyle("-fx-border-color: black");
                 ImageView cardj = new ImageView();
-                cardj.setFitHeight(120);
-                cardj.setFitWidth(70);
-                cardj.setImage(deck.getDeck().get(i * 13 + j).getImage());
+                cardj.setFitHeight(round((510-((rows-1)*10))/rows));
+                cardj.setFitWidth(round((1030-((cols-1)*10))/cols));
+                cardj.setImage(deck.getDeck().get(i * cols + j).getImage());
                 cardborder.setCenter(cardj);
                 cardPane.addColumn(j, cardborder);
             }

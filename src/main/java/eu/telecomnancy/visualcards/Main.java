@@ -1,5 +1,7 @@
 package eu.telecomnancy.visualcards;
 
+import eu.telecomnancy.visualcards.games.Cartes52.DeckOfCards52;
+import eu.telecomnancy.visualcards.games.DeckOfCards;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +17,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         
-        DeckOfCards deckOfCards = new DeckOfCards(); 
+        DeckOfCards deckOfCards = new DeckOfCards52();
         FXMLLoader loader = new FXMLLoader(); 
         loader.setLocation(getClass().getResource("DeckView.fxml")); 
         loader.setControllerFactory(iC -> new DeckViewController(deckOfCards)); 

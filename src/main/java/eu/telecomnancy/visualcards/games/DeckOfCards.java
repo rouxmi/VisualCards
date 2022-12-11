@@ -1,13 +1,16 @@
-package eu.telecomnancy.visualcards;
+package eu.telecomnancy.visualcards.games;
 
-import java.net.URL;
+import eu.telecomnancy.visualcards.MyObservable;
+import eu.telecomnancy.visualcards.games.Cartes52.CardColor52;
+import eu.telecomnancy.visualcards.games.Cartes52.CardValue52;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
 // Représente un jeu de cartes. Une variable référence l'image représentant le dos d'une carte.
 public class DeckOfCards extends MyObservable {
-    private ArrayList<Card> deck;
+    protected ArrayList<Card> deck;
 
     int topCard=0;
 
@@ -17,25 +20,13 @@ public class DeckOfCards extends MyObservable {
      * @param deck le jeu de carte pour initialiser le jeu
      */
     public DeckOfCards(ArrayList<Card> deck) {
-        this.deck = deck;
-        shuffle();
+        this.deck =deck;
     }
 
     /**
      * This is a zero argument constructor that will build a full Deck of Cards
      */
-    public DeckOfCards()
-    {
 
-        deck = new ArrayList<>();
-
-        for(CardColor color : CardColor.values()) {
-            for (CardValue value : CardValue.values()) {
-                deck.add(new Card(value,color));
-            }
-        }
-        shuffle();
-    }
 
     public ArrayList<Card> getDeck() {
         return deck;

@@ -19,7 +19,13 @@
                 <MenuItem text="Exit" onAction="#Exit"/>
             </Menu>
             <Menu text="CardDeck">
-                <MenuItem onAction="#shuffle" text="Shuffle"/>
+                <Menu text="Shuffle">
+                    <MenuItem text="Choisissez la méthode de mélange"/>
+                    <MenuItem text="Shuffle Basique" onAction="#ShuffleBasique"/>
+                    <MenuItem text="Shuffle Random" onAction="#ShuffleRandom"/>
+                    <MenuItem text="Shuffle Random Linéaire" onAction="#ShuffleLinear"/>
+                </Menu>
+                <SeparatorMenuItem/>
                 <MenuItem onAction="#sort" text="Sort"/>
             </Menu>
             <Menu text="Draw">
@@ -30,7 +36,6 @@
             </Menu>
         </MenuBar>
         <ToolBar prefHeight="40.0" prefWidth="200.0">
-            <Button mnemonicParsing="false" text="Draw a Card" onAction="#DrawCard"/>
             <Button fx:id="nextCardButton" mnemonicParsing="false" onAction="#Nextcard" text="Next Card"
                     textAlignment="CENTER"/>
             <Button mnemonicParsing="false" text="Shuffle" onAction="#shuffle"/>

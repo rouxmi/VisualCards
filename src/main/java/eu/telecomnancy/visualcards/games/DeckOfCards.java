@@ -84,7 +84,10 @@ public class DeckOfCards extends MyObservable {
      */
     public Card drawARandomCard() {
         var index=new Random().nextInt(52);
-        return deck.get(index);
+        Card result=deck.get(index);
+        topCard=index;
+        notifyObservers();
+        return result;
 
     }
 
@@ -93,7 +96,4 @@ public class DeckOfCards extends MyObservable {
         return deck.get(topCard);
     }
 
-    public void newGame() {
-        notifyObservers();
-    }
 }

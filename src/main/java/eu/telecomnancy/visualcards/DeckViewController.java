@@ -1,6 +1,10 @@
 package eu.telecomnancy.visualcards;
 
 import eu.telecomnancy.visualcards.Commands.*;
+import eu.telecomnancy.visualcards.Shuffle.ShuffleStrategie;
+import eu.telecomnancy.visualcards.Shuffle.StrategieBasique;
+import eu.telecomnancy.visualcards.Shuffle.StrategieRandom;
+import eu.telecomnancy.visualcards.Shuffle.StrategieRandomLinear;
 import eu.telecomnancy.visualcards.games.DeckOfCards;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,11 +39,13 @@ public class DeckViewController implements MyObserver, Initializable {
     private Image backOfCardImage;
 
     private CommandHistory history = new CommandHistory();
+    private ShuffleStrategie Strat;
 
     /* Relie la classe DeckOfCards au controller*/
     public DeckViewController(DeckOfCards deck) {
         this.deck = deck ;
         this.deck.addObserver(this);
+        Strat= new StrategieBasique();
     }
          
 
@@ -64,14 +70,9 @@ public class DeckViewController implements MyObserver, Initializable {
         this.backOfCardImage = backOfCardImage;
     }
 
-    public void DrawCard(ActionEvent actionEvent) {
-        executeCommand(new DrawCardCommand(deck));
-    }
-
-
     @FXML
     public void shuffle(ActionEvent event) {
-        executeCommand(new ShuffleCommand(deck));
+        executeCommand(new ShuffleCommand(deck,Strat));
     }
 
     @FXML
@@ -113,6 +114,18 @@ public class DeckViewController implements MyObserver, Initializable {
 
     public void New52Game(ActionEvent actionEvent) {
         executeCommand(new NewGame52Command(deck));
+    }
+
+    public void ShuffleBasique(ActionEvent actionEvent) {
+        Strat=new StrategieBasique();
+    }
+
+    public void ShuffleRandom(ActionEvent actionEvent) {
+        Strat= new StrategieRandom();
+    }
+
+    public void ShuffleLinear(ActionEvent actionEvent) {
+        Strat=new StrategieRandomLinear();
     }
 
     private void executeCommand(Command command) {

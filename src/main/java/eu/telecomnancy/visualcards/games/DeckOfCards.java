@@ -85,7 +85,7 @@ public class DeckOfCards extends MyObservable {
      */
     public void drawARandomCard() {
 
-        topCard=new Random().nextInt(52);
+        topCard=new Random().nextInt(deck.size());
         notifyObservers();
     }
 

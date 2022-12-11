@@ -23,11 +23,6 @@ public class DeckOfCards extends MyObservable {
         this.deck =deck;
     }
 
-    /**
-     * This is a zero argument constructor that will build a full Deck of Cards
-     */
-
-
     public ArrayList<Card> getDeck() {
         return deck;
     }
@@ -45,7 +40,7 @@ public class DeckOfCards extends MyObservable {
     public void dealTopCard()
     {
         topCard=topCard+1;
-        if (topCard>51) {
+        if (topCard> deck.size()-1) {
             topCard=0;
         }
         notifyObservers();

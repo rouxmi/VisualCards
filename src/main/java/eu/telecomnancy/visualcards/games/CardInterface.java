@@ -9,23 +9,24 @@ public interface CardInterface {
 
     //declare all functions
 
-    public CardValue getValue();
-    public CardColor getColor();
+    CardValue getValue();
+    CardColor getColor();
 
-    public void setValue(CardValue value);
+    void setValue(CardValue value);
 
-    public void setColor(CardColor color);
+    void setColor(CardColor color);
 
-    public String toString();
+    String toString();
 
 
-    public int hashCode();
+    int hashCode();
 
-    public Image getImage();
 
-    public void setImage(Image image);
+    Image getImage();
 
-    public String getSuit();
+
+
+
 
 
 

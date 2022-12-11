@@ -11,13 +11,12 @@ public class AboutCommand extends Command {
     }
 
     @Override
-    public boolean execute() {
+    public void execute() {
         try {
             new ProcessBuilder("x-www-browser", "https://en.wikipedia.org/wiki/Playing_card").start();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return true;
     }
 
 }

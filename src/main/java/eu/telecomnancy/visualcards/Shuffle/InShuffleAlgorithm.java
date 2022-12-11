@@ -16,10 +16,9 @@ public final class InShuffleAlgorithm {
     /**
      * Performs an in-place in-shuffle of the input array.
      *
-     * @param <T>   the array component type.
      * @param array the array to in-shuffle.
      */
-    public static <T> void inShuffle(ArrayList<Card> array) {
+    public static void inShuffle(ArrayList<Card> array) {
         Objects.requireNonNull(array, "The input array is null.");
 
         if (array.size() < 2) {
@@ -47,8 +46,8 @@ public final class InShuffleAlgorithm {
      */
     private static final class Parameters {
 
-        int m;
-        int k;
+        final int m;
+        final int k;
 
         Parameters(int m, int k) {
             this.m = m;
@@ -56,7 +55,7 @@ public final class InShuffleAlgorithm {
         }
     }
 
-    private static <T> void inShuffle(ArrayList<Card> array, int startIndex, int endIndex) {
+    private static void inShuffle(ArrayList<Card> array, int startIndex, int endIndex) {
         while (true) {
             int n = (endIndex - startIndex + 1) / 2;
 
@@ -72,7 +71,6 @@ public final class InShuffleAlgorithm {
                  i++, cycleStartIndex *= 3) {
                 cycleLeader(array,
                         startIndex,
-                        endIndex,
                         cycleStartIndex,
                         m);
             }
@@ -105,7 +103,6 @@ public final class InShuffleAlgorithm {
     /**
      * Implements the cycle leader algorithm on logical array
      * {@code array[startIndex], array[startIndex + 1], ..., array[endIndex].
-     *
      * @param <T>             the array component type.
      * @param array           the array holding the logical array.
      * @param startIndex      the first inclusive index of the logical array.
@@ -114,22 +111,18 @@ public final class InShuffleAlgorithm {
      * @param order           the cycle order. This will be passed to the index
      *                        generating method.
      */
-    private static <T> void cycleLeader(ArrayList<Card> array,
+    private static  void cycleLeader(ArrayList<Card> array,
                                         int startIndex,
-                                        int endIndex,
                                         int cycleStartIndex,
                                         int order) {
-        int n = (endIndex - startIndex + 1) >>> 1;
-        int currentIndex = cycleStartIndex;
-        int nextIndex = getNextIndex(currentIndex, order);
-        Card token = array.get(startIndex + currentIndex);
+        int nextIndex = getNextIndex(cycleStartIndex, order);
+        Card token = array.get(startIndex + cycleStartIndex);
         Card nextToken;
 
         while (nextIndex != cycleStartIndex) {
             nextToken = array.get(startIndex + nextIndex);
             array.set(startIndex + nextIndex, token);
             token = nextToken;
-            currentIndex = nextIndex;
             nextIndex = getNextIndex(nextIndex, order);
         }
 
@@ -158,15 +151,13 @@ public final class InShuffleAlgorithm {
      * Shifts the subarray {@code array[rangeStartIndex] ...
      * array[rangeStartIndex + rangeLength - 1]} {@code shiftLength} elements to
      * the right.
-     *
-     * @param <T>             the array component type.
      * @param array           the array holding the range being shifted.
      * @param rangeStartIndex the index at which the range being shifted begins.
      * @param rangeLength     the length of the range being shifted.
      * @param shiftLength     the number of positions to shift each array
      *                        component.
      */
-    private static <T> void rightCyclicShift(ArrayList<Card> array,
+    private static void rightCyclicShift(ArrayList<Card> array,
                                              int rangeStartIndex,
                                              int rangeLength,
                                              int shiftLength) {
@@ -179,14 +170,13 @@ public final class InShuffleAlgorithm {
     /**
      * Reverses the subarray {@code array[startIndex], ..., array[endIndex]}.
      *
-     * @param <T>        the array component type.
      * @param array      the array holding the target range.
      * @param startIndex the index of the first array component belonging to the
      *                   target range.
      * @param endIndex   the index of the last array component belonging to the
      *                   target range.
      */
-    private static <T> void reverse(ArrayList<Card> array, int startIndex, int endIndex) {
+    private static  void reverse(ArrayList<Card> array, int startIndex, int endIndex) {
         for (; startIndex < endIndex; startIndex++, endIndex--) {
             swap(array, startIndex, endIndex);
         }
@@ -195,12 +185,11 @@ public final class InShuffleAlgorithm {
     /**
      * Swaps the values of {@code array[index1]} and {@code array[index2]}.
      *
-     * @param <T>    the array component type.
      * @param array  the target array.
      * @param index1 the index of the first target array component.
      * @param index2 the index of the second target array component.
      */
-    private static <T> void swap(ArrayList<Card> array, int index1, int index2) {
+    private static  void swap(ArrayList<Card> array, int index1, int index2) {
         Card tmp = array.get(index1);
         array.set(index1, array.get(index2));
         array.set(index2, tmp);

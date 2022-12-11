@@ -7,9 +7,8 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public boolean execute() {
+    public void execute() {
         System.exit(0);
-        return true;
     }
 
 }

@@ -9,7 +9,6 @@ import eu.telecomnancy.visualcards.games.DeckOfCards;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -24,8 +23,6 @@ import static java.lang.Math.round;
 public class DeckViewController implements MyObserver, Initializable {
 
     @FXML
-    private Button nextCardButton;
-    @FXML
     private ImageView deckImageView;
     @FXML
     private ImageView activeCardImageView;
@@ -38,7 +35,7 @@ public class DeckViewController implements MyObserver, Initializable {
     
     private Image backOfCardImage;
 
-    private CommandHistory history = new CommandHistory();
+    private final CommandHistory history = new CommandHistory();
     private ShuffleStrategie Strat;
 
     /* Relie la classe DeckOfCards au controller*/
@@ -71,68 +68,77 @@ public class DeckViewController implements MyObserver, Initializable {
     }
 
     @FXML
-    public void shuffle(ActionEvent event) {
+    public void shuffle(ActionEvent ignoredEvent) {
         executeCommand(new ShuffleCommand(deck,Strat));
     }
 
     @FXML
-    public void sort(ActionEvent event) {
+    public void sort(ActionEvent ignoredEvent) {
         executeCommand(new SortCommand(deck));
     }
 
-    public void Nextcard(ActionEvent actionEvent) {
+    public void Nextcard(ActionEvent ignoredActionEvent) {
         executeCommand(new NextcardCommand(deck));
     }
 
-    public void Exit(ActionEvent actionEvent) {
+    public void Exit(ActionEvent ignoredActionEvent) {
         executeCommand(new ExitCommand());
     }
 
 
-    public void Undo(ActionEvent actionEvent) {
+    public void Undo(ActionEvent ignoredActionEvent) {
         if (!history.isEmpty()) {
             history.pop().undo();
+            update();
         }
     }
 
-    public void DrawARandomCard(ActionEvent actionEvent) {
+    public void DrawARandomCard(ActionEvent ignoredActionEvent) {
         executeCommand(new DrawARandomCardCommand(deck));
     }
 
 
-    public void About(ActionEvent actionEvent) {
+    public void About(ActionEvent ignoredActionEvent) {
         executeCommand(new AboutCommand(deck));
     }
 
-    public void NewBeloteGame(ActionEvent actionEvent) {
+    public void NewBeloteGame(ActionEvent ignoredActionEvent) {
         executeCommand(new NewBeloteGameCommand(deck));
+        while (!history.isEmpty()) {
+            history.pop();
+        }
     }
 
-    public void NewTarotGame(ActionEvent actionEvent) {
+    public void NewTarotGame(ActionEvent ignoredActionEvent) {
         executeCommand(new NewTarotGameCommand(deck));
+        while (!history.isEmpty()) {
+            history.pop();
+        }
     }
 
-    public void New52Game(ActionEvent actionEvent) {
+    public void New52Game(ActionEvent ignoredActionEvent) {
         executeCommand(new NewGame52Command(deck));
+        while (!history.isEmpty()) {
+            history.pop();
+        }
     }
 
-    public void ShuffleBasique(ActionEvent actionEvent) {
+    public void ShuffleBasique(ActionEvent ignoredActionEvent) {
         Strat=new StrategieBasique();
     }
 
-    public void ShuffleRandom(ActionEvent actionEvent) {
+    public void ShuffleRandom(ActionEvent ignoredActionEvent) {
         Strat= new StrategieRandom();
     }
 
-    public void ShuffleLinear(ActionEvent actionEvent) {
+    public void ShuffleLinear(ActionEvent ignoredActionEvent) {
         Strat=new StrategieRandomLinear();
     }
 
     private void executeCommand(Command command) {
-        if (command.execute()) {
-            history.push(command);
-            deck=command.deck;
-        }
+        command.execute() ;
+        history.push(command);
+        deck=command.deck;
         update();
     }
 
@@ -160,8 +166,8 @@ public class DeckViewController implements MyObserver, Initializable {
                 BorderPane cardborder = new BorderPane();
                 cardborder.setStyle("-fx-border-color: black");
                 ImageView cardj = new ImageView();
-                cardj.setFitHeight(round((510-((rows-1)*10))/rows));
-                cardj.setFitWidth(round((1030-((cols-1)*10))/cols));
+                cardj.setFitHeight(round((510-((rows-1)*10))/(float)rows));
+                cardj.setFitWidth(round((1030-((cols-1)*10))/(float)cols));
                 cardj.setImage(deck.getDeck().get(i * cols + j).getImage());
                 cardborder.setCenter(cardj);
                 cardPane.addColumn(j, cardborder);

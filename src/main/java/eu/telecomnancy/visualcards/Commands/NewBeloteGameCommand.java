@@ -11,9 +11,8 @@ public class NewBeloteGameCommand extends Command {
     }
 
     @Override
-    public boolean execute() {
+    public void execute() {
         deck= new DeckOfCardsBelote();
-        return true;
     }
 
 }

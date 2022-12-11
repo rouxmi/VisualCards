@@ -9,11 +9,10 @@ public class DrawARandomCardCommand extends Command {
     }
 
     @Override
-    public boolean execute() {
+    public void execute() {
         backup();
         deck.drawARandomCard();
         deck.notifyObservers();
-        return true;
     }
 
 }

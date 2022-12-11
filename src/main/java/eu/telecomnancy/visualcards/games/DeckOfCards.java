@@ -1,8 +1,8 @@
 package eu.telecomnancy.visualcards.games;
 
 import eu.telecomnancy.visualcards.MyObservable;
-import eu.telecomnancy.visualcards.games.Cartes52.CardColor52;
-import eu.telecomnancy.visualcards.games.Cartes52.CardValue52;
+
+import eu.telecomnancy.visualcards.games.Tarot.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,15 +42,13 @@ public class DeckOfCards extends MyObservable {
     /**
      * This method will "deal" the top card off the deck. At the end of the deck we start over at the beginning
      */
-    public Card dealTopCard()
+    public void dealTopCard()
     {
-        Card result=deck.get(topCard);
         topCard=topCard+1;
         if (topCard>51) {
             topCard=0;
         }
         notifyObservers();
-        return result;
     }
 
 
@@ -69,26 +67,31 @@ public class DeckOfCards extends MyObservable {
      */
     public void sort() {
         Collections.sort(deck);
+        if (deck.size() == 78) {
+            ArrayList<Card> arr = new ArrayList<>();
+            for(CardValueTarot value : CardValueTarot.values()) {
+                for(CardColorTarot color : CardColorTarot.values()) {
+                    if (color != CardColorTarot.ATOUT) {
+                        arr.add(new CardTarot(value, color));
+                    }
+                }
+            }
+            for (AtoutValue value : AtoutValue.values()) {
+                arr.add(new CardTarot(value, CardColorTarot.ATOUT));
+            }
+            deck=arr;
+        }
         notifyObservers();
     }
 
-    /**
-     * This method will draw a card from the deck at a defined place (i)
-     */
-    public Card drawACard(int i) {
-        return deck.get(i);
-    }
 
     /**
      * This method will draw a card from the deck at a random place
      */
-    public Card drawARandomCard() {
-        var index=new Random().nextInt(52);
-        Card result=deck.get(index);
-        topCard=index;
-        notifyObservers();
-        return result;
+    public void drawARandomCard() {
 
+        topCard=new Random().nextInt(52);
+        notifyObservers();
     }
 
 

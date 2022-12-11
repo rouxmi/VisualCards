@@ -10,9 +10,8 @@ public class NewTarotGameCommand extends Command {
     }
 
     @Override
-    public boolean execute() {
+    public void execute() {
         deck= new DeckOfCardsTarot();
-        return true;
     }
 
 }

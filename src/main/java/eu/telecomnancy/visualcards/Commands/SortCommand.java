@@ -9,11 +9,10 @@ public class SortCommand extends Command {
     }
 
     @Override
-    public boolean execute() {
+    public void execute() {
         backup();
         deck.sort();
         deck.notifyObservers();
-        return true;
     }
 
 }

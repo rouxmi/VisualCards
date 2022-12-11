@@ -9,11 +9,10 @@ public class NextcardCommand extends Command {
     }
 
     @Override
-    public boolean execute() {
+    public void execute() {
         backup();
         deck.dealTopCard();
         deck.notifyObservers();
-        return true;
     }
 
 }
